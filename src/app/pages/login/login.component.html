@@ -1,44 +1,46 @@
-<div class="container">
-  <div class="bs-stepper">
-    <div class="bs-stepper-header" role="tablist">
-      <!-- your steps here -->
-      <div class="step" data-target="#logins-part">
-        <button type="button" class="btn btn-link step-trigger" role="tab" aria-controls="logins-part" id="logins-part-trigger" (click)="active=1">
-          <span class="bs-stepper-circle" [ngClass]="{'color-button': active == 1}">1</span>
-          <span class="bs-stepper-label">RFC</span>
-        </button>
+<div class="fondo">
+  <div class="container">
+    <div class="bs-stepper">
+      <div class="bs-stepper-header" role="tablist">
+        <!-- your steps here -->
+        <div class="step" data-target="#logins-part">
+          <button type="button" class="btn btn-link step-trigger" role="tab" aria-controls="logins-part" id="logins-part-trigger" (click)="active=1">
+            <span class="bs-stepper-circle" [ngClass]="{'color-button': active == 1}">1</span>
+            <span class="bs-stepper-label" id="color-word">RFC</span>
+          </button>
+        </div>
+        <div class="line"></div>
+        <div class="step" data-target="#information-part">
+          <button type="button" class="btn btn-link step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger" (click)="active=2">
+            <span class="bs-stepper-circle" [ngClass]="{'color-button': active == 2}">2</span>
+            <span class="bs-stepper-label" id="color-word">Banco</span>
+          </button>
+        </div>
+        <div class="line"></div>
+        <div class="step" data-target="#information-part">
+          <button type="button" class="btn btn-link step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger" (click)="active=3">
+            <span class="bs-stepper-circle" [ngClass]="{'color-button': active == 3}">3</span>
+            <span class="bs-stepper-label" id="color-word">Usuario Contalink</span>
+          </button>
+        </div>
       </div>
-      <div class="line"></div>
-      <div class="step" data-target="#information-part">
-        <button type="button" class="btn btn-link step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger" (click)="active=2">
-          <span class="bs-stepper-circle" [ngClass]="{'color-button': active == 2}">2</span>
-          <span class="bs-stepper-label">Banco</span>
-        </button>
-      </div>
-      <div class="line"></div>
-      <div class="step" data-target="#information-part">
-        <button type="button" class="btn btn-link step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger" (click)="active=3">
-          <span class="bs-stepper-circle" [ngClass]="{'color-button': active == 3}">3</span>
-          <span class="bs-stepper-label">Usuario Contalink</span>
-        </button>
+      <div class="bs-stepper-content">
+        <!-- your steps content here -->
+        <div id="logins-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger"></div>
+        <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger"></div>
       </div>
     </div>
-    <div class="bs-stepper-content">
-      <!-- your steps content here -->
-      <div id="logins-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger"></div>
-      <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger"></div>
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+        <app-rfc *ngIf="active==1" (onClick)="validarRfc($event)">
+        </app-rfc>
+        <app-banco *ngIf="active==2" (onClick)="validarBanco($event)">
+        </app-banco>
+        <app-contalink *ngIf="active==3" (onClick)="validarContalink($event)">
+        </app-contalink>
+      </div>
+      <div class="col-md-4"></div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-      <app-rfc *ngIf="active==1" (onClick)="validarRfc($event)">
-      </app-rfc>
-      <app-banco *ngIf="active==2" (onClick)="validarBanco($event)">
-      </app-banco>
-      <app-contalink *ngIf="active==3" (onClick)="validarContalink($event)">
-      </app-contalink>
-    </div>
-    <div class="col-md-4"></div>
   </div>
 </div>

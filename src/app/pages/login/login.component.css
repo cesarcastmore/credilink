@@ -1,11 +1,25 @@
 .not-render {
-	display: none;
+  display: none;
 }
 
-button {
-	width: 100%;
+
+.color-button {
+  background-color: green;
 }
 
-.color-button{
-	background-color: green;
+
+.fondo {
+  background-image: url("/assets/small.jpg");
+  background-color: #cccccc;
+  width: 100%;
+  height:100vh;
+  opacity: 0.9;
+  filter: alpha(opacity=50);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#color-word{
+	color: white;
+	font-size: 24px;
 }
