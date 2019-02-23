@@ -20,6 +20,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SharedModule } from './shared/shared.module';
 import { AnalisisComponent } from './pages/analisis/analisis.component';
 import {AuthService } from './services/auth.service';
+import { ChartModule } from 'angular-highcharts';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 
 
@@ -44,6 +46,8 @@ import {AuthService } from './services/auth.service';
     HttpClientModule,
     FontAwesomeModule,
     SharedModule,
+    ChartModule,
+    HighchartsChartModule
 
 
   ],
