@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {MenuItem} from 'primeng/api';
+import { MenuItem } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-login',
@@ -8,18 +9,23 @@ import {MenuItem} from 'primeng/api';
 })
 export class LoginComponent implements OnInit {
 
-  items: MenuItem[];
+	public active: number=1;
 
 
   constructor() {
-    this.items = [
-      { label: 'Step 1' },
-      { label: 'Step 2' },
-      { label: 'Step 3' }
-    ];
-  
-}
 
-ngOnInit() {}
+  }
+
+  ngOnInit() {}
+
+  public validarRFC(){
+  	this.active=2;
+
+  }
+
+  public validarBanco(){
+  	this.active=3;
+
+  }
 
 }

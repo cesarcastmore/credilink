@@ -1,0 +1,11 @@
+.not-render {
+	display: none;
+}
+
+button {
+	width: 100%;
+}
+
+.color-button{
+	background-color: green;
+}
