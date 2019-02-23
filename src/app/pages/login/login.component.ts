@@ -22,9 +22,20 @@ export class LoginComponent implements OnInit {
   }
 
   public validarRfc(event: any) {
-    this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Via MessageService' });
 
-    this.active = 2;
+    if (event.success) {
+      this.messageService.add({ 
+        severity: 'success', 
+        summary: 'Exito', 
+        detail: event.msg });
+      this.active = 2;
+
+    } else {
+      this.messageService.add({ 
+        severity: 'error', 
+        summary: 'Error', 
+        detail: event.msg });
+    }
 
 
   }
