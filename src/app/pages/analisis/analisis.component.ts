@@ -22,6 +22,7 @@ export class AnalisisComponent implements OnInit {
  
  public operational_info;
  public accounting_info;
+ public cashflow_info;
 
 
   constructor(private auth: AuthService,
@@ -46,6 +47,7 @@ export class AnalisisComponent implements OnInit {
 
       this.operational_info= this.tablaService.getChartOperationalInfo(respuesta);
       this.accounting_info = this.tablaService.getChartAccountingInfo(respuesta);
+      this.cashflow_info= this.tablaService.getCashflowInfo(respuesta);
 
     });
 

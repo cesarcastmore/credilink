@@ -89,9 +89,9 @@ export class TablaResultadosService {
 
 
 
-    for (let res of respuesta.actual_status.operational_info) {
+    for (let i = 1; i <= 12; i++) {
       let date: Date = new Date();
-      date.setMonth(date.getMonth() - res.month);
+      date.setMonth(date.getMonth() - i);
       cats.push(this.getMonth(date.getMonth()));
 
     }
@@ -107,8 +107,6 @@ export class TablaResultadosService {
     let sales: number[] = [];
     let expenses: number[] = [];
     let payrolls: number[] = [];
-
-
 
 
     for (let res of respuesta.actual_status.operational_info) {
@@ -146,17 +144,17 @@ export class TablaResultadosService {
         type: 'line'
       },
       title: {
-        text: 'Monthly Average Temperature'
+        text: 'Indice de Endeudamiento'
       },
       subtitle: {
-        text: 'Source: WorldClimate.com'
+        text: 'Ultimos 12 meses'
       },
       xAxis: {
         categories: this.createCategories(response)
       },
       yAxis: {
         title: {
-          text: 'Temperature (°C)'
+          text: 'Indice'
         }
       },
       plotOptions: {
@@ -176,8 +174,8 @@ export class TablaResultadosService {
     let series: any[] = [];
     let debt_index: number[] = [];
 
-    for (let res of respuesta.actual_status.accounting_info) {
-      debt_index.push(res.debt_index);
+    for (let i=0; i< 12; i++) {
+      debt_index.push(respuesta.actual_status.accounting_info[i].debt_index);
     }
 
     series.push({
@@ -186,6 +184,85 @@ export class TablaResultadosService {
     });
 
     console.log(series);
+
+    return series;
+
+  }
+
+  public getCashflowInfo(respuesta: any) {
+    return {
+      chart: {
+        type: 'area'
+      },
+      title: {
+        text: 'Historic and Estimated Worldwide Population Growth by Region'
+      },
+      subtitle: {
+        text: 'Source: Wikipedia.org'
+      },
+      xAxis: {
+        categories: this.createCategories(respuesta),
+        tickmarkPlacement: 'on',
+        title: {
+          enabled: false
+        }
+      },
+      yAxis: {
+        title: {
+          text: 'Pesos'
+        },
+        labels: {
+          formatter: function() {
+            return this.value / 1000;
+          }
+        }
+      },
+      tooltip: {
+        split: true,
+        valueSuffix: ' pesos'
+      },
+      plotOptions: {
+        area: {
+          stacking: 'normal',
+          lineColor: '#666666',
+          lineWidth: 1,
+          marker: {
+            lineWidth: 1,
+            lineColor: '#666666'
+          }
+        }
+      },
+      series: this.getSeriesCashFlow(respuesta)
+    }
+  }
+
+  public getSeriesCashFlow(respuesta: any): string[] {
+
+    let dictionary: any= {};
+
+    for(let i=0; i<12; i++){
+      let bank_balances = respuesta.actual_status.cashflow_info[i].bank_balances;
+
+      for(let b of bank_balances){
+
+        if(dictionary[b.bank] === undefined)
+          dictionary[b.bank]=[];
+
+        dictionary[b.bank].push(b.average_balance)
+      }
+ 
+      
+    }
+
+    let series: any[]=[]
+
+    for(let attr in dictionary){
+      series.push({
+        name: attr,
+        data: dictionary[attr]
+      })
+
+    }
 
     return series;
 

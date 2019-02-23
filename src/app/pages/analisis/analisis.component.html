@@ -1,21 +1,13 @@
 <div class="container">
-  <div *ngIf="tablaResultados">Hola {{ tablaResultados.actual_status.company_name }} Gracias por utilizar CrediLink , sabemos que no es sencillo emprender y vaya que lograr ${{tablaResultados.actual_status.yearly_sales |  number:'0.1-2'}} en ventas en el último año no es nada sencillo, Muchas felicidades!!</div>
-
+  <div *ngIf="tablaResultados">Hola {{ tablaResultados.actual_status.company_name }} Gracias por utilizar CrediLink , sabemos que no es sencillo emprender y vaya que lograr ${{tablaResultados.actual_status.yearly_sales | number:'0.1-2'}} en ventas en el último año no es nada sencillo, Muchas felicidades!!</div>
   A continuación te mostramos tus principales indicadores financieros :
-
-<highcharts-chart  *ngIf="operational_info"
-  [Highcharts]="Highcharts"
-  [options]="operational_info"
-  style="width: 100%; height: 400px; display: block;"
-></highcharts-chart>
-
-
-<highcharts-chart  *ngIf="accounting_info"
-  [Highcharts]="Highcharts"
-  [options]="accounting_info"
-  style="width: 100%; height: 400px; display: block;"
-></highcharts-chart>
-
-{{accounting_info | json }}
+  <highcharts-chart *ngIf="operational_info" [Highcharts]="Highcharts" [options]="operational_info" style="width: 100%; height: 400px; display: block;"></highcharts-chart>
+  <div class="row">
+    <div class="col-md-6">
+      <highcharts-chart *ngIf="accounting_info" [Highcharts]="Highcharts" [options]="accounting_info" style="width: 100%; height: 400px; display: block;"></highcharts-chart>
+    </div>
+    <div class="col-md-6">
+      <highcharts-chart *ngIf="cashflow_info" [Highcharts]="Highcharts" [options]="cashflow_info" style="width: 100%; height: 400px; display: block;"></highcharts-chart>
+    </div>
+  </div>
 </div>
-
