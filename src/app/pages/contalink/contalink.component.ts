@@ -1,11 +1,11 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { ContalinkService } from '../../services/contalink.service';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contalink',
   templateUrl: './contalink.component.html',
   styleUrls: ['./contalink.component.css'],
-  providers: [ContalinkService]
 })
 export class ContalinkComponent implements OnInit {
 
@@ -14,7 +14,7 @@ export class ContalinkComponent implements OnInit {
 
   @Output() onClick: EventEmitter < any >= new EventEmitter < any > ();
 
-  constructor(public cs: ContalinkService) {
+  constructor(public cs: AuthService) {
 
   }
 
@@ -32,7 +32,8 @@ export class ContalinkComponent implements OnInit {
 
         this.onClick.emit({
           success: true,
-          msg: 'Has iniciado sesion de contalink'
+          msg: 'Has iniciado sesion de contalink',
+          user: user
         });
       } else {
         this.onClick.emit({

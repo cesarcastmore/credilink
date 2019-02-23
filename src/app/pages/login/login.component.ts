@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
 
 
   constructor(private messageService: MessageService,
-    private router: Router) {
+    private router: Router, private auth: AuthService) {
+
 
   }
 
@@ -74,12 +76,15 @@ export class LoginComponent implements OnInit {
 
   public validarContalink(event: any) {
     if (event.success) {
+
+      this.auth.setUser(event.user);
       
       this.messageService.add({
         severity: 'success',
         summary: 'Exito',
         detail: event.msg
       });
+
 
       this.router.navigate(['/analisis']);
 

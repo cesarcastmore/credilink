@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ContalinkService } from './contalink.service';
+import { EmpresasService } from './empresas.service';
 
-describe('ContalinkService', () => {
+describe('EmpresasService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ContalinkService = TestBed.get(ContalinkService);
+    const service: EmpresasService = TestBed.get(EmpresasService);
     expect(service).toBeTruthy();
   });
 });

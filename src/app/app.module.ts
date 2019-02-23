@@ -12,8 +12,15 @@ import { ContalinkComponent } from './pages/contalink/contalink.component';
 import { ToastModule } from 'primeng/toast';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { FormsModule } from '@angular/forms';
-import {HttpClientModule
- }  from '@angular/common/http';
+import {
+  HttpClientModule
+} from '@angular/common/http';
+import { MenusComponent } from './pages/menus/menus.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SharedModule } from './shared/shared.module';
+import { AnalisisComponent } from './pages/analisis/analisis.component';
+import {AuthService } from './services/auth.service';
+
 
 
 @NgModule({
@@ -24,6 +31,8 @@ import {HttpClientModule
     RfcComponent,
     BancoComponent,
     ContalinkComponent,
+    MenusComponent,
+    AnalisisComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,9 +41,13 @@ import {HttpClientModule
     ToastModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule,
+    SharedModule,
+
+
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
