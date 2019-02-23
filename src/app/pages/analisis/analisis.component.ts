@@ -21,6 +21,7 @@ export class AnalisisComponent implements OnInit {
 
  
  public operational_info;
+ public accounting_info;
 
 
   constructor(private auth: AuthService,
@@ -41,7 +42,10 @@ export class AnalisisComponent implements OnInit {
     this.tablaService.get(request).subscribe(respuesta => {
       this.tablaResultados = respuesta;
 
+      console.log("tabla de resultados", this.tablaResultados);
+
       this.operational_info= this.tablaService.getChartOperationalInfo(respuesta);
+      this.accounting_info = this.tablaService.getChartAccountingInfo(respuesta);
 
     });
 

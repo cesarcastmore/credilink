@@ -59,7 +59,7 @@ export class TablaResultadosService {
       },
 
       yAxis: {
-        allowDecimals: false,
+        allowDecimals: true,
         min: 0,
         title: {
           text: 'Number of fruits'
@@ -77,7 +77,7 @@ export class TablaResultadosService {
           stacking: 'normal'
         }
       },
-      series: this.createSeries(response)
+      series: this.createSeriesOperational(response)
     }
   }
 
@@ -101,7 +101,7 @@ export class TablaResultadosService {
 
   }
 
-  public createSeries(respuesta: any) {
+  public createSeriesOperational(respuesta: any) {
 
     let series: any[] = [];
     let sales: number[] = [];
@@ -138,6 +138,60 @@ export class TablaResultadosService {
 
     return series;
   }
+
+
+  public getChartAccountingInfo(response: any) {
+    return {
+      chart: {
+        type: 'line'
+      },
+      title: {
+        text: 'Monthly Average Temperature'
+      },
+      subtitle: {
+        text: 'Source: WorldClimate.com'
+      },
+      xAxis: {
+        categories: this.createCategories(response)
+      },
+      yAxis: {
+        title: {
+          text: 'Temperature (°C)'
+        }
+      },
+      plotOptions: {
+        line: {
+          dataLabels: {
+            enabled: true
+          },
+          enableMouseTracking: false
+        }
+      },
+      series: this.createSeriesAccounting(response)
+    }
+  }
+
+
+  public createSeriesAccounting(respuesta): number[] {
+    let series: any[] = [];
+    let debt_index: number[] = [];
+
+    for (let res of respuesta.actual_status.accounting_info) {
+      debt_index.push(res.debt_index);
+    }
+
+    series.push({
+      name: 'Indice de Deuda',
+      data: debt_index.reverse(),
+    });
+
+    console.log(series);
+
+    return series;
+
+  }
+
+
 
 }
 
