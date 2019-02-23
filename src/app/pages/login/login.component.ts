@@ -3,6 +3,7 @@ import { MenuItem } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { Usuario } from '../../models/usuario';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,8 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent implements OnInit {
 
   public active: number = 1;
+
+  private rfc: string;
 
 
   constructor(private messageService: MessageService,
@@ -31,9 +34,10 @@ export class LoginComponent implements OnInit {
       this.messageService.add({
         severity: 'success',
         summary: 'Exito',
-        detail: event.msg
+        detail: event.msg, 
       });
       this.active = 2;
+      this.rfc = event.rfc;
 
     } else {
       this.messageService.add({
@@ -77,7 +81,10 @@ export class LoginComponent implements OnInit {
   public validarContalink(event: any) {
     if (event.success) {
 
-      this.auth.setUser(event.user);
+      let user: Usuario = event.user;
+      user.rfc= this.rfc;
+
+      this.auth.setUser(user);
       
       this.messageService.add({
         severity: 'success',

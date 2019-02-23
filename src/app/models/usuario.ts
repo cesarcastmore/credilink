@@ -3,5 +3,6 @@ export interface Usuario {
 	key: string;
 	token: string;
 	id: number;
+	rfc: string;
 	
 }

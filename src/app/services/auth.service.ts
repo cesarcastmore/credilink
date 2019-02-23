@@ -31,6 +31,9 @@ export class AuthService {
 
   public getUser(): Usuario{
   	let usuario: Usuario= JSON.parse(localStorage.getItem("usuario"));
+
+    console.log(usuario);
+
   	return usuario;
 
   }

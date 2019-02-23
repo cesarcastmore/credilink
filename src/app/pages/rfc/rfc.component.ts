@@ -25,7 +25,8 @@ export class RfcComponent implements OnInit {
 
       this.onClick.emit({
         success: true,
-        msg: 'El RFC es correcto'
+        msg: 'El RFC es correcto',
+        rfc: this.rfc
       });
 
     } else {
