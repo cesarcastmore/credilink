@@ -9,6 +9,9 @@ import { DetallesComponent } from './pages/detalles/detalles.component';
 import { RfcComponent } from './pages/rfc/rfc.component';
 import { BancoComponent } from './pages/banco/banco.component';
 import { ContalinkComponent } from './pages/contalink/contalink.component';
+import {ToastModule} from 'primeng/toast';
+import  { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+
 
 @NgModule({
   declarations: [
@@ -17,12 +20,14 @@ import { ContalinkComponent } from './pages/contalink/contalink.component';
     DetallesComponent,
     RfcComponent,
     BancoComponent,
-    ContalinkComponent
+    ContalinkComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StepsModule
+    StepsModule, 
+    ToastModule,
+        BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

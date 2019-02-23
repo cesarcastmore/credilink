@@ -5,14 +5,15 @@ import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [MessageService]
 })
 export class LoginComponent implements OnInit {
 
   public active: number = 1;
 
 
-  constructor() {
+  constructor(private messageService: MessageService) {
 
   }
 
@@ -21,15 +22,19 @@ export class LoginComponent implements OnInit {
   }
 
   public validarRfc(event: any) {
-  	this.active=2;
+    this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Via MessageService' });
+
+    this.active = 2;
 
 
   }
 
 
   public validarBanco(event: any) {
+    this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Via MessageService' });
 
-  	this.active=3;
+
+    this.active = 3;
 
   }
 
@@ -37,6 +42,8 @@ export class LoginComponent implements OnInit {
 
 
   public validarContalink(event: any) {
+    this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Via MessageService' });
+
 
   }
 
