@@ -16,7 +16,7 @@
         </button>
       </div>
       <div class="line"></div>
-      <div class="step" data-target="#information-part" >
+      <div class="step" data-target="#information-part">
         <button type="button" class="btn btn-link step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger" (click)="active=3">
           <span class="bs-stepper-circle" [ngClass]="{'color-button': active == 3}">3</span>
           <span class="bs-stepper-label">Usuario Contalink</span>
@@ -32,35 +32,12 @@
   <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4">
-      <form *ngIf="active==1">
-        <div class="form-group">
-          <label for="exampleInputPassword1">RFC</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-        </div>
-        <button type="submit" class="btn btn-primary" (click)="validarRFC()">Siguiente</button>
-      </form>
-      <form *ngIf="active==2">
-        <div class="form-group">
-          <label for="exampleInputEmail1">Numero Cliente</label>
-          <input type="text" class="form-control" aria-describedby="emailHelp">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Contraseña</label>
-          <input type="password" class="form-control">
-        </div>
-        <button type="submit" class="btn btn-primary" (click)="validarBanco()">Siguiente</button>
-      </form>
-      <form *ngIf="active==3">
-        <div class="form-group">
-          <label for="exampleInputEmail1">Usuario</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Contraseña</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-        </div>
-        <button type="submit" class="btn btn-primary">Iniciar</button>
-      </form>
+      <app-rfc *ngIf="active==1" (onClick)="validarRfc($event)">
+      </app-rfc>
+      <app-banco *ngIf="active==2" (onClick)="validarBanco($event)">
+      </app-banco>
+      <app-contalink *ngIf="active==3" (onClick)="validarContalink($event)">
+      </app-contalink>
     </div>
     <div class="col-md-4"></div>
   </div>

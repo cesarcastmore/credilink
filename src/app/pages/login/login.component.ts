@@ -9,22 +9,34 @@ import { MessageService } from 'primeng/api';
 })
 export class LoginComponent implements OnInit {
 
-	public active: number=1;
+  public active: number = 1;
 
 
   constructor() {
 
   }
 
-  ngOnInit() {}
-
-  public validarRFC(){
-  	this.active=2;
+  ngOnInit() {
 
   }
 
-  public validarBanco(){
+  public validarRfc(event: any) {
+  	this.active=2;
+
+
+  }
+
+
+  public validarBanco(event: any) {
+
   	this.active=3;
+
+  }
+
+
+
+
+  public validarContalink(event: any) {
 
   }
 
