@@ -1,1 +1,3 @@
-{{ empresa.name }}
+<label *ngIf="empresa">{{ empresa.name }}</label>
+
+<div *ngIf="tablaResultados">{{tablaResultados | json}}</div>)
