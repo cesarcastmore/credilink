@@ -24,17 +24,19 @@ export class LoginComponent implements OnInit {
   public validarRfc(event: any) {
 
     if (event.success) {
-      this.messageService.add({ 
-        severity: 'success', 
-        summary: 'Exito', 
-        detail: event.msg });
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Exito',
+        detail: event.msg
+      });
       this.active = 2;
 
     } else {
-      this.messageService.add({ 
-        severity: 'error', 
-        summary: 'Error', 
-        detail: event.msg });
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: event.msg
+      });
     }
 
 
@@ -42,10 +44,26 @@ export class LoginComponent implements OnInit {
 
 
   public validarBanco(event: any) {
-    this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Via MessageService' });
+
+    if (event.success) {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Exito',
+        detail: event.msg
+      });
+      this.active = 3;
+
+    } else {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: event.msg
+      });
+    }
 
 
-    this.active = 3;
+
+
 
   }
 
@@ -53,7 +71,21 @@ export class LoginComponent implements OnInit {
 
 
   public validarContalink(event: any) {
-    this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Via MessageService' });
+    if (event.success) {
+      
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Exito',
+        detail: event.msg
+      });
+
+    } else {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: event.msg
+      });
+    }
 
 
   }
