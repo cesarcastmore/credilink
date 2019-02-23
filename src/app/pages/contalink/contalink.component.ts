@@ -34,6 +34,11 @@ export class ContalinkComponent implements OnInit {
           success: true,
           msg: 'Has iniciado sesion de contalink'
         });
+      } else {
+        this.onClick.emit({
+          success: false, 
+          msg: user.message
+        });
       }
 
 

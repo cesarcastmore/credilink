@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
   public active: number = 1;
 
 
-  constructor(private messageService: MessageService) {
+  constructor(private messageService: MessageService,
+    private router: Router) {
 
   }
 
@@ -78,6 +80,9 @@ export class LoginComponent implements OnInit {
         summary: 'Exito',
         detail: event.msg
       });
+
+      this.router.navigate(['/analisis']);
+
 
     } else {
       this.messageService.add({
