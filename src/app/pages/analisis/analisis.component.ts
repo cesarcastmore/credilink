@@ -8,12 +8,13 @@ import { SpinnerService } from '../../shared/services/spinner.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { RequestEnviadorCorreo, EnviadorCorreoService } from '../../services/enviador-correo.service';
 import { HsbcService } from '../../services/hsbc.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-analisis',
   templateUrl: './analisis.component.html',
   styleUrls: ['./analisis.component.css'],
-  providers: [HsbcService]
+  providers: [HsbcService, MessageService]
 })
 export class AnalisisComponent implements OnInit {
 
@@ -40,7 +41,8 @@ export class AnalisisComponent implements OnInit {
     private spinnerService: SpinnerService,
     private modalService: BsModalService,
     private enviador: EnviadorCorreoService,
-    private hsbc: HsbcService) {
+    private hsbc: HsbcService,
+    private messageService: MessageService) {
 
   }
 
@@ -57,20 +59,28 @@ export class AnalisisComponent implements OnInit {
     };
 
     this.tablaService.get(request).subscribe(respuesta => {
-      this.tablaResultados = respuesta;
 
-      console.log("EL RESULTADO ES", this.tablaResultados);
       this.spinnerService.is_active = false;
 
-      this.operational_info = this.tablaService.getChartOperationalInfo(respuesta);
-      this.accounting_info = this.tablaService.getChartAccountingInfo(respuesta);
-      this.cashflow_info = this.tablaService.getCashflowInfo(respuesta);
+      if (respuesta.actual_status) {
+
+        this.tablaResultados = respuesta;
+
+        this.operational_info = this.tablaService.getChartOperationalInfo(respuesta);
+        this.accounting_info = this.tablaService.getChartAccountingInfo(respuesta);
+        this.cashflow_info = this.tablaService.getCashflowInfo(respuesta);
+      } else {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'El empresa no existe en la base de datos de contalink'
+        });
+      }
 
     });
 
 
     this.hsbc.getTransaciones(this.user.rfc, this.user.numero_cuenta).subscribe(trans => {
-      console.log("TUS TRANSACCIONES SON LAS SIGUIENTES", this.transacciones);
       this.transacciones = trans;
 
     });
@@ -93,7 +103,7 @@ export class AnalisisComponent implements OnInit {
 
     this.enviador.sendCorreo({
       to: 'ewilliams@contalink.com',
-      from: 'ewilliams@contalink.com',
+      from: 'prospectos@credilink.com',
       message: 'Te informamos que cliente ' + this.tablaResultados.actual_status.company_name + ' ha sido preaprobado dentro de nuestra plataforma con un credito por un monto de ' +
         banco.amount + ' a una tasa de ' + banco.rate + '%.\n Este Cliente tiene ventas anuales por ' + this.tablaResultados.actual_status.yearly_sales +
         ' y cuenta con un saldo promedio de ' + this.tablaResultados.actual_status.average_bank_balance + ' en los ultimos doce meses, tiene un indice ' +

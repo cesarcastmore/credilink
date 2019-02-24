@@ -20,11 +20,11 @@
   <div *ngIf="type== 'hsbc'">
     <div class="form-group">
       <label for="exampleInputEmail1" class="color-label">Numero Cuenta</label>
-      <input type="text" class="form-control" aria-describedby="emailHelp" formControlName="numero_cuenta" name="numero_cuenta">
+      <input type="text" class="form-control" formControlName="numero_cuenta">
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1" class="color-label" formControlName="contrasenia" name="contrasenia">Contraseña</label>
-      <input type="password" class="form-control">
+      <label for="exampleInputPassword1" class="color-label"  name="contrasenia">Contraseña</label>
+      <input type="password" class="form-control" formControlName="contrasenia">
     </div>
     <button type="submit" class="btn btn-primary" (click)="validarBanco()">Siguiente</button>
   </div>

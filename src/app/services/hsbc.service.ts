@@ -16,13 +16,10 @@ export class HsbcService {
 
   public getTransaciones(rfc: string, numero_cuenta: string): Observable<any> {
 
-    let params: HttpParams = new HttpParams().set('rfc', rfc).set("account_number", numero_cuenta);
     let headers: HttpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 
-
-    return this.http.post < any > (this.url, null, {
-      headers: headers,
-      params: params
+    return this.http.post < any > (this.url, {empresa_rfc : rfc, account_number: numero_cuenta }, {
+      headers: headers
     })
 
 
