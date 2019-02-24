@@ -17,7 +17,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="type== 'hsbc'">
+  <div *ngIf="type== 'hsbc' && !loading">
     <div class="form-group">
       <label for="exampleInputEmail1" class="color-label">Numero Cuenta</label>
       <input type="text" class="form-control" formControlName="numero_cuenta">
@@ -28,4 +28,9 @@
     </div>
     <button type="submit" class="btn btn-primary" (click)="validarBanco()">Siguiente</button>
   </div>
+
+  <div class="d-flex align-items-center loading" *ngIf="loading">
+  <strong>Cargando...</strong>
+  <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+</div>
 </div>

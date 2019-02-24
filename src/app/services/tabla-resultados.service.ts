@@ -259,7 +259,7 @@ export class TablaResultadosService {
     for(let attr in dictionary){
       series.push({
         name: attr,
-        data: dictionary[attr]
+        data: dictionary[attr].reverse()
       })
 
     }

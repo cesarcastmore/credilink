@@ -43,7 +43,7 @@
       <div class="col-md-4">
         <app-rfc *ngIf="active==1" (onClick)="validarRfc($event)">
         </app-rfc>
-        <app-banco *ngIf="active==2" (onClick)="validarBanco($event)">
+        <app-banco *ngIf="active==2" (onClick)="validarBanco($event)" [rfc]=rfc>
         </app-banco>
         <app-contalink *ngIf="active==3" (onClick)="validarContalink($event)">
         </app-contalink>
