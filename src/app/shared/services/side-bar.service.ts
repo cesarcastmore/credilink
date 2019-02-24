@@ -15,7 +15,13 @@ export class SideBarService {
       icon: 'fa fa-home',
       active: false,
       type: 'simple',
-      href: '/app/home'
+      href: '/analisis'
+    },{
+      title: 'Salir',
+      icon: 'fa fa-home',
+      active: false,
+      type: 'simple',
+      href: '/logout'
     }
   ];
   constructor() { }

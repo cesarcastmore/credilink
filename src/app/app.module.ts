@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { StepsModule } from 'primeng/steps';
-import { DetallesComponent } from './pages/detalles/detalles.component';
 import { RfcComponent } from './pages/rfc/rfc.component';
 import { BancoComponent } from './pages/banco/banco.component';
 import { ContalinkComponent } from './pages/contalink/contalink.component';
@@ -22,6 +21,7 @@ import { AnalisisComponent } from './pages/analisis/analisis.component';
 import {AuthService } from './services/auth.service';
 import { ChartModule } from 'angular-highcharts';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { LogoutComponent } from './pages/logout/logout.component';
 
 
 
@@ -29,12 +29,12 @@ import { HighchartsChartModule } from 'highcharts-angular';
   declarations: [
     AppComponent,
     LoginComponent,
-    DetallesComponent,
     RfcComponent,
     BancoComponent,
     ContalinkComponent,
     MenusComponent,
     AnalisisComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,

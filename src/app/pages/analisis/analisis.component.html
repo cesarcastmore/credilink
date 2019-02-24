@@ -10,4 +10,13 @@
       <highcharts-chart *ngIf="cashflow_info" [Highcharts]="Highcharts" [options]="cashflow_info" style="width: 100%; height: 400px; display: block;"></highcharts-chart>
     </div>
   </div>
+  <br>
+  <div *ngIf="tablaResultados">
+    En base a lo anterior podemos determinar que tienes un {{tablaResultados.actual_status.debt_index_opinion}} capacidad endeudamiento y en base a ello nos gustaría hacerte algunas recomendaciones
+    <ul>
+      <li>Mantén un saldo promedio mayor. En los últimos 12 meses has tenido un saldo promedio mensual de ${{tablaResultados.actual_status.average_bank_balance | number:'0.1-2' }}</li>
+      <li>Intenta no incrementar tus pasivos ( Deudas a Proveedores, Impuestos pendientes de Pagar, Créditos ) en relación a tus activos ( Dinero en Bancos, Maquinaria y Equipo , Cuentas por Cobrar ) . Actualmente tienes una índice de endeudamiento de {{tablaResultados.actual_status.debt_index}} , lo cual quiere decir que por cada peso en activos tienes {{tablaResultados.actual_status.debt_index}} veces que se deben.</li>
+      <li>Tu utilidad bruta del negocio es {{tablaResultados.actual_status.profit_margin}}% , el cual _____________ y recomendamos mejorarlo tratando de reducir tus costos y gastos.</li>
+    </ul>
+    Gracias a lo anterior, tu duro de trabajo por {{tablaResultados.actual_status.company_age}} años , la relación con tu Contador {{tablaResultados.actual_status.accountant}} y Contalink hemos logrado conectarte con las siguientes instituciones que tienen un crédito listo para ti para que sigas creciendo tu negocio ¿Te interesa?</div>
 </div>
