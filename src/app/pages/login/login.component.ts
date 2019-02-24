@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
   public active: number = 1;
 
   private rfc: string;
+  private numero_cuenta: string;
+  private contraseña_cuenta: string;
 
 
   constructor(private messageService: MessageService,
@@ -59,6 +61,9 @@ export class LoginComponent implements OnInit {
         summary: 'Exito',
         detail: event.msg
       });
+
+      this.numero_cuenta= event.banco.numero_cuenta;
+      this.contraseña_cuenta= event.banco.contrasenia;
       this.active = 3;
 
     } else {
@@ -83,6 +88,7 @@ export class LoginComponent implements OnInit {
 
       let user: Usuario = event.user;
       user.rfc= this.rfc;
+      user.numero_cuenta= this.numero_cuenta;
 
       this.auth.setUser(user);
       

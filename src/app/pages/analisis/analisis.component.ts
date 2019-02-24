@@ -6,11 +6,14 @@ import { RequestTablaResultados, TablaResultadosService } from '../../services/t
 import * as Highcharts from 'highcharts';
 import { SpinnerService } from '../../shared/services/spinner.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { RequestEnviadorCorreo, EnviadorCorreoService } from '../../services/enviador-correo.service';
+import { HsbcService } from '../../services/hsbc.service';
 
 @Component({
   selector: 'app-analisis',
   templateUrl: './analisis.component.html',
-  styleUrls: ['./analisis.component.css']
+  styleUrls: ['./analisis.component.css'],
+  providers: [HsbcService]
 })
 export class AnalisisComponent implements OnInit {
 
@@ -27,20 +30,27 @@ export class AnalisisComponent implements OnInit {
   public accounting_info;
   public cashflow_info;
 
+  private user: Usuario;
+  private transacciones: any;
+
 
   constructor(private auth: AuthService,
     private empresaService: EmpresasService,
     private tablaService: TablaResultadosService,
     private spinnerService: SpinnerService,
-    private modalService: BsModalService) {}
+    private modalService: BsModalService,
+    private enviador: EnviadorCorreoService,
+    private hsbc: HsbcService) {
+
+  }
 
   ngOnInit() {
-    let user: Usuario = this.auth.getUser();
+    this.user = this.auth.getUser();
 
 
     let request: RequestTablaResultados = {
-      rfc: user.rfc,
-      authorization: user.token + ' ' + user.key,
+      rfc: this.user.rfc,
+      authorization: this.user.token + ' ' + this.user.key,
       months_behind: 12,
       customer_type: 'company',
       credit_score: 650
@@ -59,17 +69,51 @@ export class AnalisisComponent implements OnInit {
     });
 
 
+    this.hsbc.getTransaciones(this.user.rfc, this.user.numero_cuenta).subscribe(trans => {
+      console.log("TUS TRANSACCIONES SON LAS SIGUIENTES", this.transacciones);
+      this.transacciones = trans;
+
+    });
+
+
 
 
   }
 
 
 
-  openModal(template: TemplateRef < any > ) {
+  openModal(template: TemplateRef < any > , banco: any) {
     this.modalRef = this.modalService.show(template);
+
+    let resultados: any = this.tablaResultados;
+
+    resultados.offers = banco
+
+
+
+    this.enviador.sendCorreo({
+      to: 'ewilliams@contalink.com',
+      from: 'ewilliams@contalink.com',
+      message: 'Te informamos que cliente ' + this.tablaResultados.actual_status.company_name + ' ha sido preaprobado dentro de nuestra plataforma con un credito por un monto de ' +
+        banco.amount + ' a una tasa de ' + banco.rate + '%.\n Este Cliente tiene ventas anuales por ' + this.tablaResultados.actual_status.yearly_sales +
+        ' y cuenta con un saldo promedio de ' + this.tablaResultados.actual_status.average_bank_balance + ' en los ultimos doce meses, tiene un indice ' +
+        ' de endeudamiento de ' + this.tablaResultados.actual_status.debt_index + ' y un indice de cobertura de deuda de' + this.tablaResultados.actual_status.dscr + '\n\n' +
+        ' Se incluye toda la información anexa, agradecemos el oportuno seguimiento.',
+      subject: 'CrediLink: Tenemos un nuevo prospecto',
+      attachment: {
+        resultados: resultados,
+        transacciones: this.transacciones
+      }
+    }).subscribe(enviado => {
+
+      console.log("ENVIANDO", enviado);
+
+    });
+
+
   }
 
-  public aceptar(){
+  public aceptar() {
     this.modalRef.hide();
   }
 

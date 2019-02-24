@@ -32,13 +32,14 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4"></div>
-      <div class="col-md-4"><label class="color-title">¿NECESITAS CAPITAL?</label></div>
-      <div class="col-md-4"></div>
+      <div class="col-md-12"><label class="color-title">¿NECESITAS CAPITAL?</label></div>
     </div>
-    <label class="color-intro">Conoce cuál es tu situación financiera y conecta con Instituciones y Bancos dispuestos a otorgar crédito para crecer tu negocio.</label>
     <div class="row">
-      <div class="col-md-4"></div>
+      <div class="col-md-6" *ngIf="active== 1"> <label class="color-intro">Conoce cuál es tu situación financiera y conecta con Instituciones y Bancos dispuestos a otorgar crédito para crecer tu negocio.</label></div>
+      <div class="col-md-6" *ngIf="active== 2"><label class="color-intro"> ¿Eres cliente de HSBC o BANREGIO? . Ayúdanos a conocer más sobre tu empresa e incrementa tus posibilidades de acceder a un crédito </label></div>
+      <div class="col-md-6" *ngIf="active== 3"><label class="color-intro">Por último ayúdanos a concoer más sobre tu contabilidad al acceder con tus credenciales de CONTALINK.</label></div>
+    </div>
+    <div class="row">
       <div class="col-md-4">
         <app-rfc *ngIf="active==1" (onClick)="validarRfc($event)">
         </app-rfc>

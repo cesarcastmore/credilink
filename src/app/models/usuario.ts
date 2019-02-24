@@ -4,5 +4,6 @@ export interface Usuario {
 	token: string;
 	id: number;
 	rfc: string;
+	numero_cuenta: string;
 	
 }

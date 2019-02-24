@@ -16,7 +16,7 @@ export class BancoComponent implements OnInit {
 
   constructor() {
   this.formBancos= new FormGroup({
-    numero_cliente: new FormControl(),
+    numero_cuenta: new FormControl(),
     contrasenia: new FormControl()
   }) 
   }
@@ -28,7 +28,8 @@ export class BancoComponent implements OnInit {
   public validarBanco(){
 
   	this.onClick.emit({
-  		success: true
+  		success: true, 
+      banco: this.formBancos.value
   	});
   	
   }

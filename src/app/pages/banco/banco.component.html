@@ -2,7 +2,6 @@
   <div class="row" *ngIf="!type">
     <div class="paymentCont">
       <div class="headingWrap">
-        <h3 class="headingTop text-center">Escoge tu banco</h3>
       </div>
       <div class="paymentWrap">
         <div class="btn-group paymentBtnGroup btn-group-justified" data-toggle="buttons">
@@ -20,8 +19,8 @@
   </div>
   <div *ngIf="type== 'hsbc'">
     <div class="form-group">
-      <label for="exampleInputEmail1" class="color-label">Numero Cliente</label>
-      <input type="text" class="form-control" aria-describedby="emailHelp" formControlName="numero_cliente" name="numero_cliente">
+      <label for="exampleInputEmail1" class="color-label">Numero Cuenta</label>
+      <input type="text" class="form-control" aria-describedby="emailHelp" formControlName="numero_cuenta" name="numero_cuenta">
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1" class="color-label" formControlName="contrasenia" name="contrasenia">Contraseña</label>
