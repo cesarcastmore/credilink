@@ -195,10 +195,10 @@ export class TablaResultadosService {
         type: 'area'
       },
       title: {
-        text: 'Historic and Estimated Worldwide Population Growth by Region'
+        text: 'Saldos Bancarios Promedio'
       },
       subtitle: {
-        text: 'Source: Wikipedia.org'
+        text: 'Mensual'
       },
       xAxis: {
         categories: this.createCategories(respuesta),
@@ -278,4 +278,5 @@ export interface RequestTablaResultados {
   authorization: string;
   months_behind: number;
   customer_type: string;
+  credit_score: number;
 }
