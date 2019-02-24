@@ -22,6 +22,7 @@ import {AuthService } from './services/auth.service';
 import { ChartModule } from 'angular-highcharts';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { LogoutComponent } from './pages/logout/logout.component';
+import { ReactiveFormsModule }  from '@angular/forms';
 
 
 
@@ -47,7 +48,8 @@ import { LogoutComponent } from './pages/logout/logout.component';
     FontAwesomeModule,
     SharedModule,
     ChartModule,
-    HighchartsChartModule
+    HighchartsChartModule,
+    ReactiveFormsModule
 
 
   ],

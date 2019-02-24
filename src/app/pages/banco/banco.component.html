@@ -1,11 +1,32 @@
-<form>
-  <div class="form-group">
-    <label for="exampleInputEmail1" class="color-label">Numero Cliente</label>
-    <input type="text" class="form-control" aria-describedby="emailHelp">
+<div [formGroup]="formBancos">
+  <div class="row" *ngIf="!type">
+    <div class="paymentCont">
+      <div class="headingWrap">
+        <h3 class="headingTop text-center">Escoge tu banco</h3>
+      </div>
+      <div class="paymentWrap">
+        <div class="btn-group paymentBtnGroup btn-group-justified" data-toggle="buttons">
+          <label class="btn paymentMethod active">
+            <div class="method hsbc"></div>
+            <button name="options" (click)="type= 'hsbc'"></button>
+          </label>
+          <label class="btn paymentMethod">
+            <div class="method banregio"></div>
+            <button name="options" (click)="type= 'banregio'"></button>
+          </label>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1" class="color-label">Contraseña</label>
-    <input type="password" class="form-control">
+  <div *ngIf="type== 'hsbc'">
+    <div class="form-group">
+      <label for="exampleInputEmail1" class="color-label">Numero Cliente</label>
+      <input type="text" class="form-control" aria-describedby="emailHelp" formControlName="numero_cliente" name="numero_cliente">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1" class="color-label" formControlName="contrasenia" name="contrasenia">Contraseña</label>
+      <input type="password" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="validarBanco()">Siguiente</button>
   </div>
-  <button type="submit" class="btn btn-primary" (click)="validarBanco()">Siguiente</button>
-</form>
+</div>

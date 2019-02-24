@@ -1,4 +1,5 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output} from '@angular/core';
+import { FormGroup, FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-banco',
@@ -9,9 +10,19 @@ export class BancoComponent implements OnInit {
 
 	@Output() onClick: EventEmitter<any>= new EventEmitter<any>();
 
-  constructor() { }
+  public formBancos: FormGroup;
+
+  public type: string;
+
+  constructor() {
+  this.formBancos= new FormGroup({
+    numero_cliente: new FormControl(),
+    contrasenia: new FormControl()
+  }) 
+  }
 
   ngOnInit() {
+
   }
 
   public validarBanco(){
