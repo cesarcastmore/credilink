@@ -23,6 +23,7 @@ import { ChartModule } from 'angular-highcharts';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { LogoutComponent } from './pages/logout/logout.component';
 import { ReactiveFormsModule }  from '@angular/forms';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 
@@ -49,7 +50,8 @@ import { ReactiveFormsModule }  from '@angular/forms';
     SharedModule,
     ChartModule,
     HighchartsChartModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ModalModule.forRoot()
 
 
   ],

@@ -1,22 +1,75 @@
-<div class="container">
-  <div *ngIf="tablaResultados">Hola {{ tablaResultados.actual_status.company_name }} Gracias por utilizar CrediLink , sabemos que no es sencillo emprender y vaya que lograr ${{tablaResultados.actual_status.yearly_sales | number:'0.1-2'}} en ventas en el último año no es nada sencillo, Muchas felicidades!!</div>
-  A continuación te mostramos tus principales indicadores financieros :
-  <highcharts-chart *ngIf="operational_info" [Highcharts]="Highcharts" [options]="operational_info" style="width: 100%; height: 400px; display: block;"></highcharts-chart>
-  <div class="row">
-    <div class="col-md-6">
-      <highcharts-chart *ngIf="accounting_info" [Highcharts]="Highcharts" [options]="accounting_info" style="width: 100%; height: 400px; display: block;"></highcharts-chart>
-    </div>
-    <div class="col-md-6">
-      <highcharts-chart *ngIf="cashflow_info" [Highcharts]="Highcharts" [options]="cashflow_info" style="width: 100%; height: 400px; display: block;"></highcharts-chart>
+<div class="container" *ngIf="tablaResultados">
+  <div class="card margin-top">
+    <div class="card-body">
+      <div>Hola <strong> {{ tablaResultados.actual_status.company_name }}</strong> <br>Gracias por utilizar CrediLink , sabemos que no es sencillo emprender y vaya que lograr <strong>${{tablaResultados.actual_status.yearly_sales | number:'0.1-2'}}</strong> en ventas en el último año no es nada sencillo, Muchas felicidades!!</div>
+      A continuación te mostramos tus principales indicadores financieros :
     </div>
   </div>
-  <br>
-  <div *ngIf="tablaResultados">
-    En base a lo anterior podemos determinar que tienes un {{tablaResultados.actual_status.debt_index_opinion}} capacidad endeudamiento y en base a ello nos gustaría hacerte algunas recomendaciones
-    <ul>
-      <li>Mantén un saldo promedio mayor. En los últimos 12 meses has tenido un saldo promedio mensual de ${{tablaResultados.actual_status.average_bank_balance | number:'0.1-2' }}</li>
-      <li>Intenta no incrementar tus pasivos ( Deudas a Proveedores, Impuestos pendientes de Pagar, Créditos ) en relación a tus activos ( Dinero en Bancos, Maquinaria y Equipo , Cuentas por Cobrar ) . Actualmente tienes una índice de endeudamiento de {{tablaResultados.actual_status.debt_index}} , lo cual quiere decir que por cada peso en activos tienes {{tablaResultados.actual_status.debt_index}} veces que se deben.</li>
-      <li>Tu utilidad bruta del negocio es {{tablaResultados.actual_status.profit_margin}}% , el cual _____________ y recomendamos mejorarlo tratando de reducir tus costos y gastos.</li>
-    </ul>
-    Gracias a lo anterior, tu duro de trabajo por {{tablaResultados.actual_status.company_age}} años , la relación con tu Contador {{tablaResultados.actual_status.accountant}} y Contalink hemos logrado conectarte con las siguientes instituciones que tienen un crédito listo para ti para que sigas creciendo tu negocio ¿Te interesa?</div>
+  <div class="card margin-top">
+    <div class="card-body">
+      <highcharts-chart *ngIf="operational_info" [Highcharts]="Highcharts" [options]="operational_info" style="width: 100%; height: 400px; display: block;"></highcharts-chart>
+    </div>
+  </div>
+  <div class="card margin-top">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <highcharts-chart *ngIf="accounting_info" [Highcharts]="Highcharts" [options]="accounting_info" style="width: 100%; height: 400px; display: block;"></highcharts-chart>
+        </div>
+        <div class="col-md-6">
+          <highcharts-chart *ngIf="cashflow_info" [Highcharts]="Highcharts" [options]="cashflow_info" style="width: 100%; height: 400px; display: block;"></highcharts-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card margin-top">
+    <div class="card-body">
+      <div>
+        En base a lo anterior podemos determinar que tienes un <strong>{{tablaResultados.actual_status.debt_index_opinion}}</strong> capacidad endeudamiento y en base a ello nos gustaría hacerte algunas recomendaciones
+        <ul>
+          <li>Mantén un saldo promedio mayor. En los últimos 12 meses has tenido un saldo promedio mensual de <strong> ${{tablaResultados.actual_status.average_bank_balance | number:'0.1-2' }}</strong></li>
+          <li>Intenta no incrementar tus pasivos ( Deudas a Proveedores, Impuestos pendientes de Pagar, Créditos ) en relación a tus activos ( Dinero en Bancos, Maquinaria y Equipo , Cuentas por Cobrar ) . Actualmente tienes una índice de endeudamiento de <strong>{{tablaResultados.actual_status.debt_index}}</strong> , lo cual quiere decir que por cada peso en activos tienes <strong>{{tablaResultados.actual_status.debt_index}}</strong> veces que se deben.</li>
+          <li>Tu utilidad bruta del negocio es <strong>{{tablaResultados.actual_status.profit_margin}}%</strong> , el cual _____________ y recomendamos mejorarlo tratando de reducir tus costos y gastos.</li>
+        </ul>
+        Gracias a lo anterior, tu duro de trabajo por <strong>{{tablaResultados.actual_status.company_age}}</strong> años , la relación con tu Contador <strong>{{tablaResultados.actual_status.accountant}}</strong> y Contalink hemos logrado conectarte con las siguientes instituciones que tienen un crédito listo para ti para que sigas creciendo tu negocio ¿Te interesa?</div>
+    </div>
+  </div>
+  <div class="card margin-top">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4" *ngFor="let banco of tablaResultados.offers">
+          <div class="card" style="width: 18rem;">
+            <img *ngIf="banco.financial_institution== 'BANREGIO'" class="card-img-top" src="assets/banregio.png" style="width: 280px; height: 280px;">
+            <img *ngIf="banco.financial_institution== 'HSBC'" class="card-img-top" src="assets/hsbc.png" style="width: 280px; height: 280px;">
+            <img *ngIf="banco.financial_institution== 'KONFIO'" class="card-img-top" src="assets/konfio.png" style="width: 280px; height: 280px;">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Monto {{banco.amount}}</li>
+              <li class="list-group-item">Tasa {{banco.rate}}</li>
+              <li class="list-group-item">Plazo {{banco.credit_term}}</li>
+              <li class="list-group-item">CAT {{banco.credit_cat}}</li>
+            </ul>
+            <div class="card-body">
+              <button class="btn btn-success tamanio" (click)="openModal(template)">Aceptar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Confirmación</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Felicidades, tu solicitud ha sido enviada y un representante de la institucion financiera se pondra en contacto contigo a la brevedad.</p>
+    <div class="row">
+      <div class="col-md-12">
+        <button class="btn btn-success btn-md" (click)="aceptar()">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</ng-template>

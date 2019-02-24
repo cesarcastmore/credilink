@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SideBarService } from '../../shared/services/side-bar.service';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { SpinnerService } from '../../shared/services/spinner.service';
 
 @Component({
   selector: 'app-menus',
@@ -19,7 +20,9 @@ export class MenusComponent implements OnInit {
 
   faBars = faBars;
 
-  constructor(public sidebarservice: SideBarService) {
+  constructor(public sidebarservice: SideBarService,
+    private spinnerServoce: SpinnerService) {
+    this.spinnerServoce.is_active=true;
 
   }
 
