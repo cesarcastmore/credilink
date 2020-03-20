@@ -80,10 +80,10 @@ export class AnalisisComponent implements OnInit {
     });
 
 
-    this.hsbc.getTransaciones(this.user.rfc, this.user.numero_cuenta).subscribe(trans => {
+    /*this.hsbc.getTransaciones(this.user.rfc, this.user.numero_cuenta).subscribe(trans => {
       this.transacciones = trans;
 
-    });
+    });*/
 
 
 

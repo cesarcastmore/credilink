@@ -5,23 +5,23 @@
       <div class="bs-stepper-header" role="tablist">
         <!-- your steps here -->
         <div class="step" data-target="#logins-part">
-          <button type="button" class="btn btn-link step-trigger" role="tab" aria-controls="logins-part" id="logins-part-trigger">
+          <button type="button" class="btn btn-link step-trigger">
             <span class="bs-stepper-circle" [ngClass]="{'color-button': active == 1}">1</span>
-            <span class="bs-stepper-label" id="color-word">RFC</span>
+            <span class="bs-stepper-label" id="color-word">Datos Generales</span>
           </button>
         </div>
         <div class="line"></div>
         <div class="step" data-target="#information-part">
-          <button type="button" class="btn btn-link step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
+          <button type="button" class="btn btn-link step-trigger">
             <span class="bs-stepper-circle" [ngClass]="{'color-button': active == 2}">2</span>
-            <span class="bs-stepper-label" id="color-word">Banco</span>
+            <span class="bs-stepper-label" id="color-word">Credenciales SAT</span>
           </button>
         </div>
         <div class="line"></div>
         <div class="step" data-target="#information-part">
-          <button type="button" class="btn btn-link step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
+          <button type="button" class="btn btn-link step-trigger">
             <span class="bs-stepper-circle" [ngClass]="{'color-button': active == 3}">3</span>
-            <span class="bs-stepper-label" id="color-word">Contalink</span>
+            <span class="bs-stepper-label" id="color-word">Confirmacion</span>
           </button>
         </div>
       </div>
@@ -32,23 +32,13 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12"><label class="color-title">¿NECESITAS CAPITAL?</label></div>
+      <div class="col-md-6" *ngIf="active== 1"> <label class="color-intro">Información General.</label></div>
+      <div class="col-md-12" *ngIf="active== 2"><label class="color-intro"> Hemos encontrado por lo menos 3 instituciones financieras que podrían otorgarte un crédito de XXXXXX en un plazo XXXXXX . Para perfilarte con la más adecuada y conocer si eres candidato por favor proporciona tus credenciales del SAT para perfilarte con la mejor propuesta y en máximo</label></div>
+      <div class="col-md-12" *ngIf="active== 3"><label class="color-intro">En menos de 1HR ( Horario Hábil ) te daremos una respuesta si eres candidato o no. </label></div>
     </div>
-    <div class="row">
-      <div class="col-md-6" *ngIf="active== 1"> <label class="color-intro">Conoce cuál es tu situación financiera y conecta con Instituciones y Bancos dispuestos a otorgar crédito para crecer tu negocio.</label></div>
-      <div class="col-md-6" *ngIf="active== 2"><label class="color-intro"> ¿Eres cliente de HSBC o BANREGIO? . Ayúdanos a conocer más sobre tu empresa e incrementa tus posibilidades de acceder a un crédito </label></div>
-      <div class="col-md-6" *ngIf="active== 3"><label class="color-intro">Por último ayúdanos a concoer más sobre tu contabilidad al acceder con tus credenciales de CONTALINK.</label></div>
-    </div>
-    <div class="row">
-      <div class="col-md-4">
-        <app-rfc *ngIf="active==1" (onClick)="validarRfc($event)">
-        </app-rfc>
-        <app-banco *ngIf="active==2" (onClick)="validarBanco($event)" [rfc]=rfc>
-        </app-banco>
-        <app-contalink *ngIf="active==3" (onClick)="validarContalink($event)">
-        </app-contalink>
-      </div>
-      <div class="col-md-4"></div>
-    </div>
+    <datos-generales *ngIf="active==1" (siguiente)="sendGeneralInformation($event)">
+    </datos-generales>
+    <credenciales-sat *ngIf="active==2" [contact]="contact" (siguiente)="sendSATInformation($event)">
+    </credenciales-sat>
   </div>
 </div>

@@ -4,12 +4,12 @@ import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { Usuario } from '../../models/usuario';
-
+import { RequestUpdatePasswordSAT, RequestContact, ResponseUpdatePasswordSAT, ResponseContact, CredilinkIntegrationsService } from '../../services/credilink-integrations.service'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [MessageService]
+  providers: [MessageService, CredilinkIntegrationsService]
 })
 export class LoginComponent implements OnInit {
 
@@ -18,10 +18,13 @@ export class LoginComponent implements OnInit {
   private rfc: string;
   private numero_cuenta: string;
   private contraseña_cuenta: string;
+  private contact: any;
+  private application_id: number;
 
 
   constructor(private messageService: MessageService,
-    private router: Router, private auth: AuthService) {
+    private router: Router, private auth: AuthService,
+    private credilink: CredilinkIntegrationsService) {
 
 
   }
@@ -30,49 +33,33 @@ export class LoginComponent implements OnInit {
 
   }
 
-  public validarRfc(event: any) {
 
-    if (event.success) {
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Exito',
-        detail: event.msg, 
-      });
-      this.active = 2;
-      this.rfc = event.rfc;
+  public sendGeneralInformation(event: any) {
 
-    } else {
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Error',
-        detail: event.msg
-      });
-    }
+    this.contact = event.contact;
+
+    let request: RequestContact = this.contact;
+
+    this.credilink.contact(request).subscribe(response => {
 
 
-  }
+      if (response.status) {
+        this.application_id = response.application_id;
 
-
-  public validarBanco(event: any) {
-
-    if (event.success) {
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Exito',
-        detail: event.msg
-      });
-
-      this.numero_cuenta= event.banco.numero_cuenta;
-      this.contraseña_cuenta= event.banco.contrasenia;
-      this.active = 3;
-
-    } else {
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Error',
-        detail: event.msg
-      });
-    }
+        this.active = event.next;
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Exito',
+          detail: response.message
+        });
+      } else {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: response.message
+        });
+      }
+    })
 
 
 
@@ -81,36 +68,30 @@ export class LoginComponent implements OnInit {
   }
 
 
+  public sendSATInformation(event: any) {
+    let request: RequestUpdatePasswordSAT = event.sat;
 
+    request.application_id = this.application_id;
 
-  public validarContalink(event: any) {
-    if (event.success) {
-
-      let user: Usuario = event.user;
-      user.rfc= this.rfc;
-      user.numero_cuenta= this.numero_cuenta;
-
-      this.auth.setUser(user);
-      
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Exito',
-        detail: event.msg
-      });
-
-
-      this.router.navigate(['/analisis']);
-
-
-    } else {
-      this.messageService.add({
-        severity: 'error',
-        summary: 'Error',
-        detail: event.msg
-      });
-    }
+    this.credilink.updatePasswordSat(request).subscribe(update => {
+      if (update.status) {
+        this.active = event.next;
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Exito',
+          detail: update.message
+        });
+      } else
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: update.message
+        });
+    })
 
 
   }
+
+
 
 }

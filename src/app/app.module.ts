@@ -24,6 +24,9 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { LogoutComponent } from './pages/logout/logout.component';
 import { ReactiveFormsModule }  from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { DatosGeneralesComponent } from './pages/datos-generales/datos-generales.component';
+import { CredencialesSatComponent } from './pages/credenciales-sat/credenciales-sat.component';
+import { ConfirmacionComponent } from './pages/confirmacion/confirmacion.component';
 
 
 
@@ -37,6 +40,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     MenusComponent,
     AnalisisComponent,
     LogoutComponent,
+    DatosGeneralesComponent,
+    CredencialesSatComponent,
+    ConfirmacionComponent,
   ],
   imports: [
     BrowserModule,

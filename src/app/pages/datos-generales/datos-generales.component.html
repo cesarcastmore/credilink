@@ -1,0 +1,31 @@
+<div [formGroup]="formItem" class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Razon Social" formControlName="company_name">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Nombre" formControlName="contact_name">
+    </div>
+    <div class="form-group">
+      <input type="email" class="form-control" placeholder="Correo" formControlName="contact_email">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Telefono" formControlName="contact_phone">
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Monto Solicitado" formControlName="amount_needed">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Plazo" formControlName="term_needed">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="RFC" formControlName="rfc">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Codigo Referencia" formControlName="referrer_code">
+    </div>
+      <button type="submit" class="btn btn-primary" (click)="enviar()">Siguiente</button>
+  </div>
+</div>
